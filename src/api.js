@@ -17,6 +17,8 @@ const esDirectorio = (ruta) => fs.statSync(ruta).isDirectory();
 //Leer contenido de directorio
 const obetenerContenidoDirectorio = (directorio) => fs.readdirSync(directorio);
 
+console.log(esDirectorio('E:/LABORATORIA/PROYECTOS/MD-LINKS/LIM016-md-links/PRUEBA_MdLinks/directorioPadre'), 'hola')
+
 //Validar si el archivo tiene extension .md
 const esArchivoMd = (archivo) => path.extname(archivo) === '.md' ? true : false;
 

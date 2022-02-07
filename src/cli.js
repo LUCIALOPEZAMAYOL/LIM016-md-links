@@ -4,6 +4,7 @@ var figlet = require('figlet');
 const {totalLink, uniqueLinks,brokenLinks, help} = require('./function-cli.js');
 const [,,...args] = process.argv;
 
+[,, path[0], stats[1], valiadte[2]]
 
 //console.log(args);
 let title= figlet.textSync('MD-LINKS', {
@@ -59,6 +60,10 @@ switch(args.length){
     }else{
         console.log('La opción que está ingresando, no es válida');
     }
+    break;
+
+    default:
+        console.log('ninguno de los valores coincide con los parametros de ingreso');
     break;
 };
 

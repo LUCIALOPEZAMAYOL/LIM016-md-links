@@ -11,6 +11,7 @@
   "scripts": {
     "test": "jest --coverage"
   },
+  
   "dependencies": {
     "figlet": "^1.5.2",
     "jsdom": "^19.0.0",
@@ -29,6 +30,7 @@
   },
   "author": "Lucia López Amayo",
   "devDependencies": {
+    "eslint": "^8.8.0",
     "jest": "^27.4.7"
   }
 }
