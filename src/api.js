@@ -53,7 +53,7 @@ const obtenerLinks = (arrayRutaArchivoMd)=>{
     arrayNodos.forEach(etiqueta=>{
       arregloLinks.push({
         href:etiqueta.href,
-        text:(etiqueta.textContent).slice(0,40),
+        text:(etiqueta.textContent).slice(0,50),
         file: rutaArchivoMd
       })
     }) 

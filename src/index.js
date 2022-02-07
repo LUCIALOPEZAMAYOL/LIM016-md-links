@@ -1,7 +1,10 @@
 const api = require('./api.js');
 
-const mdLinks = (path, options)=>{
+const mdLinks = (path, options={validate:false})=>{
   return new Promise((resolve, reject)=>{
+    if(path===undefined || path===''){
+      reject('se requiere <path>');
+    }
     let rutaAbsoluta = api.convertirRuta(path);
     let validarExistenciaRuta=api.rutaExistente(rutaAbsoluta);
     
@@ -28,6 +31,5 @@ const mdLinks = (path, options)=>{
     }
   })
 };
-
 
 module.exports =  mdLinks;
