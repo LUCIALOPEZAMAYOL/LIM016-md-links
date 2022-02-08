@@ -1,74 +1,68 @@
 const path = require('path');
 const fs = require('fs');
-var md = require('markdown-it')();
-const jsdom = require("jsdom");
+const md = require('markdown-it')();
+const jsdom = require('jsdom');
+
 const { JSDOM } = jsdom;
 const fetch = require('node-fetch');
 
-//validar ruta absoluta
-const convertirRuta = (ruta) => path.isAbsolute(ruta) ? ruta : path.resolve(ruta);
+// validar ruta absoluta
+const convertirRuta = (ruta) => (path.isAbsolute(ruta) ? ruta : path.resolve(ruta));
 
-//validar existencia de una ruta
+// validar existencia de una ruta
 const rutaExistente = (ruta) => fs.existsSync(ruta);
 
-//validar si es directorio
+// validar si es directorio
 const esDirectorio = (ruta) => fs.statSync(ruta).isDirectory();
 
-//Leer contenido de directorio
+// Leer contenido de directorio
 const obetenerContenidoDirectorio = (directorio) => fs.readdirSync(directorio);
 
-console.log(esDirectorio('E:/LABORATORIA/PROYECTOS/MD-LINKS/LIM016-md-links/PRUEBA_MdLinks/directorioPadre'), 'hola')
+// Validar si el archivo tiene extension .md
+const esArchivoMd = (archivo) => (path.extname(archivo) === '.md');
 
-//Validar si el archivo tiene extension .md
-const esArchivoMd = (archivo) => path.extname(archivo) === '.md' ? true : false;
-
-//Función que retorna un array de todos los archivos .md de un directorio
+// Función que retorna un array de todos los archivos .md de un directorio
 const obtenerArchivosMd = (ruta) => {
   let arregloArchivosMd = [];
-  if(esDirectorio(ruta)){
+  if (esDirectorio(ruta)) {
     const contenidoDirectorio = obetenerContenidoDirectorio(ruta);
-    contenidoDirectorio.forEach((archivo)=>{
+    contenidoDirectorio.forEach((archivo) => {
       const obtenerRutaAbsoluta = path.join(ruta, archivo);
-      if(esDirectorio(obtenerRutaAbsoluta)){
+      if (esDirectorio(obtenerRutaAbsoluta)) {
         arregloArchivosMd = arregloArchivosMd.concat(obtenerArchivosMd(obtenerRutaAbsoluta));
-      }else if(esArchivoMd(obtenerRutaAbsoluta)){
-          arregloArchivosMd.push(obtenerRutaAbsoluta);
+      } else if (esArchivoMd(obtenerRutaAbsoluta)) {
+        arregloArchivosMd.push(obtenerRutaAbsoluta);
       }
-      
-    })
-  }else{
-    if(esArchivoMd(ruta)){
-      arregloArchivosMd.push(ruta);
-    }
-  } 
+    });
+  } else if (esArchivoMd(ruta)) {
+    arregloArchivosMd.push(ruta);
+  }
   return arregloArchivosMd;
-  };
+};
 
-
-//Funcion que devuelve un array con los link contenidos en los archivos .md 
-const obtenerLinks = (arrayRutaArchivoMd)=>{
-  let arregloLinks=[];
-  arrayRutaArchivoMd.forEach((rutaArchivoMd)=>{
-    let leerContenidoArchivo = fs.readFileSync(rutaArchivoMd,'utf-8');
-    let archivoFormatoHtml = md.render(leerContenidoArchivo);
-    const arrayNodos = new JSDOM(archivoFormatoHtml).window.document.querySelectorAll("a");
-    arrayNodos.forEach(etiqueta=>{
+// Funcion que devuelve un array con los link contenidos en los archivos .md
+const obtenerLinks = (arrayRutaArchivoMd) => {
+  const arregloLinks = [];
+  arrayRutaArchivoMd.forEach((rutaArchivoMd) => {
+    const leerContenidoArchivo = fs.readFileSync(rutaArchivoMd, 'utf-8');
+    const archivoFormatoHtml = md.render(leerContenidoArchivo);
+    const arrayNodos = new JSDOM(archivoFormatoHtml).window.document.querySelectorAll('a');
+    arrayNodos.forEach((etiqueta) => {
       arregloLinks.push({
-        href:etiqueta.href,
-        text:(etiqueta.textContent).slice(0,50),
-        file: rutaArchivoMd
-      })
-    }) 
-  })
+        href: etiqueta.href,
+        text: (etiqueta.textContent).slice(0, 50),
+        file: rutaArchivoMd,
+      });
+    });
+  });
   return arregloLinks;
 };
 
-//Funcion para validar los links
+// Funcion para validar los links
 const validarLinks = (objLinks) => {
-  const array = objLinks.map((element) => {
-    return fetch(element.href)
+  const array = objLinks.map((element) => fetch(element.href)
     .then((response) => {
-      if(response.status>=200 && response.status<=299){
+      if (response.status >= 200 && response.status <= 299) {
         return {
           href: element.href,
           text: element.text,
@@ -76,27 +70,23 @@ const validarLinks = (objLinks) => {
           status: response.status,
           ok: 'Ok',
         };
-      } else{
-        return {
-          href: element.href,
-          text: element.text,
-          file: element.file,
-          status: response.status,
-          ok: 'Fail',
-        };
       }
-    })
-    .catch(() => {
       return {
         href: element.href,
         text: element.text,
         file: element.file,
-        status: "Failed Status",
+        status: response.status,
         ok: 'Fail',
-      }
-    });
-  });
-  return Promise.all(array) 
+      };
+    })
+    .catch(() => ({
+      href: element.href,
+      text: element.text,
+      file: element.file,
+      status: 'Failed Status',
+      ok: 'Fail',
+    })));
+  return Promise.all(array);
 };
 
 module.exports = {
@@ -106,5 +96,5 @@ module.exports = {
   esArchivoMd,
   obtenerArchivosMd,
   obtenerLinks,
-  validarLinks
+  validarLinks,
 };

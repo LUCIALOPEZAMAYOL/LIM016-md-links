@@ -1,18 +1,16 @@
-//Devuelve cantidad de total de links
-const totalLink = (arrayObjLinks)=> arrayObjLinks.map(element => (element.href)).length;    
+// Devuelve cantidad de total de links
+const totalLink = (arrayObjLinks) => arrayObjLinks.map((element) => (element.href)).length;
 
 // Devuelve cantidad de links únicos
-const uniqueLinks= (arrayObjLinks)=> {
-    let arrayLinks= arrayObjLinks.map((element)=> element.href);
-    return [...new Set(arrayLinks)].length; 
+const uniqueLinks = (arrayObjLinks) => {
+  const arrayLinks = arrayObjLinks.map((element) => element.href);
+  return [...new Set(arrayLinks)].length;
 };
 
-//Devuelve cantidad de links rotos/inválidos
-const brokenLinks=(arrayObjLinks)=> arrayObjLinks.filter(element=> (element.ok==='Fail')).length;
+// Devuelve cantidad de links rotos/inválidos
+const brokenLinks = (arrayObjLinks) => arrayObjLinks.filter((element) => (element.ok === 'Fail')).length;
 
-const help=
-
-    `*************************************************** MD-LINKS ***************************************************************
+const help = `*************************************************** MD-LINKS ***************************************************************
         INSTRUCCIONES DE USO:
 
         1.Ingreso de ruta
@@ -33,12 +31,11 @@ const help=
         --validate --stats ó --stats --validate   =>  mdLinks <path> --validate --stats     //  mdLinks <path> --stats --validate 
         Mostrará el total de links, unicos y rotos.
 
-        *************************************************************************************************************************** `
-
+        *************************************************************************************************************************** `;
 
 module.exports = {
-    totalLink,
-    uniqueLinks,
-    brokenLinks,
-    help
-}; 
+  totalLink,
+  uniqueLinks,
+  brokenLinks,
+  help,
+};

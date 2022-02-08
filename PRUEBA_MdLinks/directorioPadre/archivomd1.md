@@ -3,12 +3,6 @@
 ## Índice
 
 * [1. Preámbulo](#1-preámbulo)
-* [2. UX Experiencia de usuario](#2-experiencia-de-usuario)
-* [3. Ceación de prototipo](#3-creación-de-prototipo)
-* [4. Imágenes de la aplicación](#4-imágenes-de-la-aplicación)
-* [6. Checklist](#9-checklist)
-
-***
 
 ## 1. Preámbulo
 
@@ -30,21 +24,3 @@ Por ejemplo, si usamos un desplazamiento (_offset_) de 3 posiciones:
 * La palabra CASA se cifra como FDVD.
 * Alfabeto sin cifrar: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 * Alfabeto cifrado: D E F G H I J K L M N O P Q R S T U V W X Y Z A B C
-
-En la actualidad, todos los cifrados de sustitución simple se descifran con
-mucha facilidad y, aunque en la práctica no ofrecen mucha seguridad en la
-comunicación por sí mismos; el cifrado César sí puede formar parte de sistemas
-más complejos de codificación, como el cifrado Vigenère, e incluso tiene
-aplicación en el sistema ROT13.
-
-## 3. Ceación de prototipo
-El protofipo fue diseñado en PowerPoint.
-Se realizó un diseño sencillo para que sea de fácil entendimeinto para el usuario.
-Se diseño una página con 2 vistas, la primera muestra una bienvenida y dos botones, una de instrucciones que al hacer click te muestra una ventana emergente que contiene la instrucciones; y el otro botón de empezar que te lleva a la segunda vista donde se encuentra la funcionalidad de cifrar y descifrar.
-
-
-![imagenBaner](ImgReadmi/BannerNew.png)
-
-    La aplicación web de pokemon data, se realizó con la intención de crear una enciclopedia, en la que cualquiera pueda consultar datos de todos los pokemones existentes, como las debilidades, resistencia, tipos, etc.
-
-    Una información realmente útil tanto para jugadores que solo quieran saber algo del pokemon, como para los que busquen algún set competitivo de algún pokemon en concreto.
