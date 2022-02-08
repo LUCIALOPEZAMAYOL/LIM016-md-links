@@ -16,8 +16,6 @@ Para poder instalar la libería ejecuta en la terminal:
 
 #### 2.2)GUÍA DE USO
 
-`const mdL = require('mdLinks')`
-
 ##### API
 
 Para ejecutar la librería utiliza el siguiente comando:
@@ -97,7 +95,16 @@ Total: 3
 Unique: 3
 Broken: 1
 ```
-### 3) Diagrama de flujo
+### 3) DIAGRAMA DE PROYECTO
 
 #### DIAGRAMA API
-![Diagrama_Api](https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg)
+
+![](https://raw.githubusercontent.com/LUCIALOPEZAMAYOL/LIM016-md-links/main/imagenes/diagrama_api.jpg)
+
+#### DIAGRAMA CLI
+
+![](https://raw.githubusercontent.com/LUCIALOPEZAMAYOL/LIM016-md-links/main/imagenes/diagrama_cli.jpg)
+
+### 4) CREADO POR:
+
+#### Lucia López Amayo

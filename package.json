@@ -10,7 +10,7 @@
   },
   "scripts": {
     "index": "node src/index.js",
-    "test": "jest -detectOpenHandles --coverage",
+    "test": "jest --coverage",
     "eslint": "eslint --ext .js src/ test/",
     "pretest": "npm run eslint"
   },
